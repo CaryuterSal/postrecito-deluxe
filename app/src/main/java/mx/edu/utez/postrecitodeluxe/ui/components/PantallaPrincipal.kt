@@ -16,21 +16,28 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import mx.edu.utez.postrecitodeluxe.ui.data.model.CakeFilling
+import mx.edu.utez.postrecitodeluxe.ui.data.model.CakeFlavor
+import mx.edu.utez.postrecitodeluxe.ui.data.model.CakeFrosting
+import mx.edu.utez.postrecitodeluxe.ui.data.model.CakeShape
+import mx.edu.utez.postrecitodeluxe.ui.data.model.CakeSize
+import mx.edu.utez.postrecitodeluxe.ui.data.model.CakeTopping
 import mx.edu.utez.postrecitodeluxe.ui.data.model.Pastel
+import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
 
 @Composable
-fun PantallaPrincipal(p: Pastel, (Pastel)->Unit){
+fun PantallaPrincipal(p: Pastel, o: (Pastel)->Unit){
     Column {
         Card(
             modifier = Modifier
                 .fillMaxSize()
-                .clickable{x(p)}
+                .clickable{o(p)}
         ){
             Column (
                 modifier = Modifier.padding(16.dp)
             ) {
                 Row (
-                    VerticalAlignment = Alignment.CenterVertically,
+                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 12.dp)
@@ -46,14 +53,16 @@ fun PantallaPrincipal(p: Pastel, (Pastel)->Unit){
 
 @Preview(showBackground = true)
 @Composable
-fun Preview PantalaPrincipal(){
+fun  PreviewPantallaPrincipal(){
     val p = Pastel(
-        "fresa",
-        "Vainilla",
-        "Fresas",
-        "Nutella",
-        "Mediano",
-        "Circular"
+        glaseado = CakeFrosting.STRAWBERRY,
+        sabor = CakeFlavor.CHOCOLATE,
+        topping = CakeTopping.STRAWBERRIES,
+        forma = CakeShape.HEART,
+        relleno = CakeFilling.VANILLA,
+        tamanio = CakeSize.LARGE
     )
-    //Theme
+    PostrecitoDeluxeTheme {
+        PantallaPrincipal(p) {print("Hola")}
+    }
 }

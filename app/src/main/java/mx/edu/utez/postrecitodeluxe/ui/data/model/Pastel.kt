@@ -1,12 +1,12 @@
 package mx.edu.utez.postrecitodeluxe.ui.data.model
 
 class Pastel (
-    val sabor: String,
-    val glaseado: String,
-    val topping: String,
-    val relleno: String,
-    val tamanio: String,
-    val forma: String
+    val sabor: CakeFlavor,
+    val glaseado: CakeFrosting,
+    val topping: CakeTopping,
+    val relleno: CakeFilling,
+    val tamanio: CakeSize,
+    val forma: CakeShape
 ){
 
 }
