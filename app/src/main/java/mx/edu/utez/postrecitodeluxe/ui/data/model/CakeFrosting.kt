@@ -5,4 +5,13 @@ enum class CakeFrosting {
     VANILLA,
     STRAWBERRY,
     CREAM;
+
+    override fun toString(): String {
+        return when(this){
+            CHOCOLATE -> "Chocolate"
+            VANILLA -> "Vainilla"
+            CREAM -> "Crema"
+            STRAWBERRY -> "Fresa"
+        }
+    }
 }

@@ -59,7 +59,7 @@ fun  PreviewPantallaPrincipal(){
         sabor = CakeFlavor.CHOCOLATE,
         topping = CakeTopping.STRAWBERRIES,
         forma = CakeShape.HEART,
-        relleno = CakeFilling.VANILLA,
+        relleno = CakeFilling.PASTRY_CREAM,
         tamanio = CakeSize.LARGE
     )
     PostrecitoDeluxeTheme {
