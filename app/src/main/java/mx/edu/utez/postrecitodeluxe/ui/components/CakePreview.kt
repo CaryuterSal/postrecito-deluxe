@@ -22,9 +22,9 @@ import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
 
 
 @Composable
-fun CakePreview(cake: Cake){
+fun CakePreview(cake: Cake, modifier: Modifier = Modifier){
     Box(
-        modifier = Modifier.size(200.dp),
+        modifier = modifier.size(200.dp),
         contentAlignment = Alignment.Center
     ) {
         Image(
@@ -88,6 +88,6 @@ fun CakePreviewPreview(){
         CakeShape.SQUARE
     )
     PostrecitoDeluxeTheme {
-        CakePreview(cake)
+        CakePreview(cake, Modifier.size(40.dp))
     }
 }
