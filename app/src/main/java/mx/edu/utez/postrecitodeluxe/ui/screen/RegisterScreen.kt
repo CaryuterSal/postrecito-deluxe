@@ -11,18 +11,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import mx.edu.utez.postrecitodeluxe.data.model.PrimaryButton
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import mx.edu.utez.postrecitodeluxe.R
-import mx.edu.utez.postrecitodeluxe.data.model.Link
+import mx.edu.utez.postrecitodeluxe.ui.components.buttons.PrimaryButton
+import mx.edu.utez.postrecitodeluxe.ui.components.text.Link
 import mx.edu.utez.postrecitodeluxe.ui.components.images.CircularImage
-import mx.edu.utez.postrecitodeluxe.ui.components.inputs.PasswordField
 import mx.edu.utez.postrecitodeluxe.ui.components.inputs.PasswordField2
-import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField
 import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField2
 import mx.edu.utez.postrecitodeluxe.viewmodel.RegisterViewModel
 
@@ -58,7 +56,7 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel = 
 
         Spacer(modifier = Modifier.height(5.dp))
 
-        PrimaryButton("Registrarse") {
+        PrimaryButton(text = "Registrarse") {
             viewModel.register {
                 navController.navigate("homeScreen") {
                     popUpTo("register") { inclusive = true }

@@ -24,11 +24,11 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
 import mx.edu.utez.postrecitodeluxe.R
+import mx.edu.utez.postrecitodeluxe.ui.components.buttons.PrimaryButton
 import mx.edu.utez.postrecitodeluxe.ui.components.images.CircularImage
-import mx.edu.utez.postrecitodeluxe.data.model.Link
+import mx.edu.utez.postrecitodeluxe.ui.components.text.Link
 import mx.edu.utez.postrecitodeluxe.viewmodel.LoginViewModel
 import mx.edu.utez.postrecitodeluxe.ui.components.inputs.PasswordField
-import mx.edu.utez.postrecitodeluxe.data.model.PrimaryButton
 import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField
 
 @Composable
@@ -60,9 +60,9 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
             )
         }
 
-        PrimaryButton("Iniciar sesión") {
+        PrimaryButton(text = "Iniciar sesión") {
             viewModel.login {
-                navController.navigate("homeScreen") {
+                navController.navigate("home") {
                     popUpTo("login") { inclusive = true }
                 }
             }

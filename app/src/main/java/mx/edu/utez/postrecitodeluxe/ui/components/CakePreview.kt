@@ -2,6 +2,7 @@ package mx.edu.utez.postrecitodeluxe.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -9,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import mx.edu.utez.postrecitodeluxe.R
 import mx.edu.utez.postrecitodeluxe.data.model.Cake
@@ -22,11 +24,20 @@ import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
 
 
 @Composable
-fun CakePreview(cake: Cake, modifier: Modifier = Modifier){
+fun CakePreview(cake: Cake, modifier: Modifier = Modifier, size: Dp = 200.dp){
     Box(
-        modifier = modifier.size(200.dp),
+        modifier = modifier.size(size),
         contentAlignment = Alignment.Center
     ) {
+        Image(
+            painter = painterResource(cake.forma.previewImageRes),
+            contentDescription = null,
+            colorFilter = ColorFilter.tint(cake.sabor.color),
+            modifier = Modifier
+                .size(size * 0.25f)
+                .align(Alignment.TopStart)
+                .padding(size * 0.05f)
+        )
         Image(
             painter = painterResource(cake.tamanio.previewImageRes),
             contentDescription = null,
@@ -80,14 +91,14 @@ fun CakePreview(cake: Cake, modifier: Modifier = Modifier){
 @Composable
 fun CakePreviewPreview(){
     val cake = Cake(
-        CakeFlavor.CHOCOLATE,
+        CakeFlavor.RED_VELVET,
         CakeFrosting.VANILLA,
         CakeTopping.SPRINKLES,
         CakeFilling.CHOCOLATE,
         CakeSize.LARGE,
-        CakeShape.SQUARE
+        CakeShape.ROUND
     )
     PostrecitoDeluxeTheme {
-        CakePreview(cake, Modifier.size(40.dp))
+        CakePreview(cake, size = 100.dp)
     }
 }

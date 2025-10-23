@@ -1,4 +1,4 @@
-package mx.edu.utez.postrecitodeluxe.data.model
+package mx.edu.utez.postrecitodeluxe.ui.components.text
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding

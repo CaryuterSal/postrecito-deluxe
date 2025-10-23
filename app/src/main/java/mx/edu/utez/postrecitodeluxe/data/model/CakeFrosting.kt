@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.ui.graphics.Color
 import mx.edu.utez.postrecitodeluxe.R
 
-enum class CakeFrosting(@DrawableRes val icon: Int, val color: Color) {
+enum class CakeFrosting(@DrawableRes override val icon: Int, val color: Color): CakeOption {
     CHOCOLATE(R.drawable.chocolate, Color(0xFF362315)),
     VANILLA(R.drawable.vanilla, Color(0xFFE7D19C)),
     STRAWBERRY(R.drawable.fresa, Color(0xFF8A0125)),

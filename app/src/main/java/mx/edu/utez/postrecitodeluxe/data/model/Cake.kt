@@ -7,6 +7,4 @@ data class Cake (
     val relleno: CakeFilling,
     val tamanio: CakeSize,
     val forma: CakeShape
-){
-
-}
+)

@@ -9,6 +9,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,15 +25,9 @@ import mx.edu.utez.postrecitodeluxe.ui.theme.Primary
 
 @Composable
 fun DeleteButton(modifier: Modifier = Modifier, onDelete: () -> Unit){
-    Button(
-        onClick = onDelete,
-        colors = ButtonDefaults.buttonColors(Color.Transparent),
-        modifier = modifier
-            .size(100.dp)
-            .background(Color.Transparent, shape = CircleShape))
+    IconButton(
+        onClick = onDelete)
     {
-        Image(  painter = painterResource(R.drawable.delete),
-            contentDescription = "Eliminar")
         Icon(
             painter = painterResource(R.drawable.delete),
             contentDescription = "Eliminar")
