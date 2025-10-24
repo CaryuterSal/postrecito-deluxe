@@ -39,19 +39,22 @@ fun CakeCard(cake: Cake, x: (Cake) -> Unit, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp)
             .clickable{x(cake)},
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.cardColors(containerColor = cakeBgColor),
-        shape = RoundedCornerShape(12.dp)
+        shape = RoundedCornerShape(30.dp)
     ) {
-       Row {
+       Row(
+           modifier = Modifier.padding(20.dp),
+       ){
 
            //Aqui va la imagen del pastel
+           CakePreview(cake, size = 100.dp)
 
            Spacer(modifier = Modifier.width(16.dp))
 
            Column {
+               Spacer(modifier = Modifier.height(16.dp))
                Text(
                    text = "Pastel",
                    fontWeight = FontWeight.Bold,
@@ -68,10 +71,12 @@ fun CakeCard(cake: Cake, x: (Cake) -> Unit, modifier: Modifier = Modifier) {
            }
 
            Spacer(modifier = Modifier.width(16.dp))
+           Spacer(modifier = Modifier.height(35.dp))
 
            Image(painter = painterResource(id = R.drawable.trash),
                contentDescription = "Eliminar pastel",
-               modifier = Modifier.size(20.dp))
+               modifier = Modifier.size(20.dp)
+           )
        }
     }
 }
