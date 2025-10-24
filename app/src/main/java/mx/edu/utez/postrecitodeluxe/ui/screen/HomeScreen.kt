@@ -18,6 +18,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import mx.edu.utez.postrecitodeluxe.data.model.Cake
+import mx.edu.utez.postrecitodeluxe.ui.components.CakeCard
+import mx.edu.utez.postrecitodeluxe.ui.components.CakeList
 import mx.edu.utez.postrecitodeluxe.ui.components.CakePreview
 import mx.edu.utez.postrecitodeluxe.ui.components.buttons.PrimaryButton
 import mx.edu.utez.postrecitodeluxe.ui.components.text.PropertyLabel
@@ -27,24 +29,13 @@ import mx.edu.utez.postrecitodeluxe.viewmodel.CakeViewModel
 @Composable
 fun HomeScreen(viewModel: CakeViewModel ,navController: NavController) {
 
-    val cakes by viewModel.cakeList.collectAsStateWithLifecycle()
+    val cakesList by viewModel.cakeList.collectAsStateWithLifecycle()
     Column {
         PrimaryButton(text = "Crear nuevo") {navController.navigate("createCake")}
-        LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            modifier = Modifier
-                .fillMaxSize()
-        ){
-            items(cakes, Cake::hashCode){
-                ElevatedCard(
-                    onClick = {
-                        viewModel.selectCake(cakes.indexOf(it))
-                        navController.navigate("editCake")}
-                ) {
-                    CakePreview(it, size = 100.dp)
-                }
-            }
-        }
+        CakeList(lista = cakesList, onClick = {
+            viewModel.selectCake(cakesList.indexOf(it))
+            navController.navigate("editCake")
+        })
     }
 
 }

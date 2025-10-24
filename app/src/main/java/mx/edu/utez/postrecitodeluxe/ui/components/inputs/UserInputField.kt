@@ -15,16 +15,39 @@ import mx.edu.utez.postrecitodeluxe.viewmodel.RegisterViewModel
 
 @Composable
 fun UserInputField(
-    value: String,
-    onValueChange: (String) -> Unit,
+    viewModel: LoginViewModel,
     label: String = "Usuario",
     onNext: (() -> Unit)? = null
 ) {
     val focusManager = LocalFocusManager.current
 
     OutlinedTextField(
-        value = value,
-        onValueChange = {onValueChange(it)},
+        value = viewModel.username.value,
+        onValueChange = { viewModel.username.value = it },
+        label = { Text(label) },
+        modifier = Modifier.fillMaxWidth(),
+        singleLine = true,
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Next
+        ),
+        keyboardActions = KeyboardActions(
+            onNext = {
+                onNext?.invoke() ?: focusManager.moveFocus(FocusDirection.Down)
+            }
+        )
+    )
+}
+@Composable
+fun UserInputField2(
+    viewModel: RegisterViewModel,
+    label: String = "Usuario",
+    onNext: (() -> Unit)? = null
+) {
+    val focusManager = LocalFocusManager.current
+
+    OutlinedTextField(
+        value = viewModel.username.value,
+        onValueChange = { viewModel.username.value = it },
         label = { Text(label) },
         modifier = Modifier.fillMaxWidth(),
         singleLine = true,
