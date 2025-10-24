@@ -44,11 +44,13 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
     ) {
         CircularImage(R.drawable.pastel)
         UserInputField(
-            viewModel = viewModel,
+            value = viewModel.email.value,
+            onValueChange = {viewModel.email.value = (it)},
             label = "Correo"
         )
         PasswordField(
-            viewModel = viewModel,
+            value = viewModel.password.value,
+            onValueChange = {viewModel.password.value = (it)},
             label = "Contraseña"
         )
 

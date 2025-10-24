@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 
 class LoginViewModel: ViewModel() {
     var password = mutableStateOf("")
+
+    val email = mutableStateOf("")
     var username = mutableStateOf("")
     var loginError = mutableStateOf("")
 

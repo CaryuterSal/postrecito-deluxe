@@ -20,8 +20,9 @@ import mx.edu.utez.postrecitodeluxe.R
 import mx.edu.utez.postrecitodeluxe.ui.components.buttons.PrimaryButton
 import mx.edu.utez.postrecitodeluxe.ui.components.text.Link
 import mx.edu.utez.postrecitodeluxe.ui.components.images.CircularImage
-import mx.edu.utez.postrecitodeluxe.ui.components.inputs.PasswordField2
-import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField2
+import mx.edu.utez.postrecitodeluxe.ui.components.inputs.PasswordField
+import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField
+
 import mx.edu.utez.postrecitodeluxe.viewmodel.RegisterViewModel
 
 
@@ -36,21 +37,25 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel = 
     ) {
         CircularImage(R.drawable.pastel)
 
-        UserInputField2(
-            viewModel = viewModel,
+        UserInputField(
+            value = viewModel.username.value,
+            onValueChange = {viewModel.username.value = (it)},
             label = "Usuario"
         )
-        UserInputField2(
-            viewModel = viewModel,
+        UserInputField(
+            value = viewModel.email.value,
+            onValueChange = {viewModel.email.value = (it)},
             label = "Correo"
         )
-        PasswordField2(
-            viewModel = viewModel,
+        PasswordField(
+            value = viewModel.password.value,
+            onValueChange = {viewModel.password.value = (it)},
             label = "Contraseña"
         )
 
-        PasswordField2(
-            viewModel = viewModel,
+        PasswordField(
+            value = viewModel.password.value,
+            onValueChange = {viewModel.password.value = (it)},
             label = "Confirmar contraseña"
         )
 
