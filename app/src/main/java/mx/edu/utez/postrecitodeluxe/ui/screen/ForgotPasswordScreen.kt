@@ -72,21 +72,20 @@ fun ForgotPasswordScreen(navController: NavController, viewModel: PasswordViewMo
                 )
 
 
-                UserInputField(
-                    ""
+                TextField(
+                    "Ingresa tu correo.",
+                    {}
+
                 )
+
 
                 Spacer(modifier = Modifier.height(24.dp))
 
 
                 Button(
-                    onClick = {
-                        if (email.isNotBlank()) {
-                            onResetClick(email)
-                        }
-                    },
+                    onClick = ,
                     modifier = Modifier.fillMaxWidth(),
-                    enabled = email.isNotBlank()
+
                 ) {
                     Text("Restablecer Contraseña")
                 }
