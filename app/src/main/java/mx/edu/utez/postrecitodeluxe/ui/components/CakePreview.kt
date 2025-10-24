@@ -91,6 +91,7 @@ fun CakePreview(cake: Cake, modifier: Modifier = Modifier, size: Dp = 200.dp){
 @Composable
 fun CakePreviewPreview(){
     val cake = Cake(
+        1,
         CakeFlavor.RED_VELVET,
         CakeFrosting.VANILLA,
         CakeTopping.SPRINKLES,

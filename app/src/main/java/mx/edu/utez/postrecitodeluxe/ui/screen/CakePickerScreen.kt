@@ -72,6 +72,7 @@ fun CakePickerScreen(
 fun CakePickerScreenPreview(){
     val vm = viewModel<CakeViewModel>()
     var cake by remember { mutableStateOf(Cake(
+        1,
         CakeFlavor.CHOCOLATE,
         CakeFrosting.VANILLA,
         CakeTopping.SPRINKLES,

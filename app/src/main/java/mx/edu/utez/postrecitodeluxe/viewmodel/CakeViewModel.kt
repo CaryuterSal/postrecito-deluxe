@@ -23,20 +23,49 @@ class CakeViewModel: ViewModel() {
     init {
         _cakeList.value = listOf(
             Cake(
-                CakeFlavor.CHOCOLATE,
-                CakeFrosting.VANILLA,
-                CakeTopping.SPRINKLES,
-                CakeFilling.CHOCOLATE,
-                CakeSize.LARGE,
-                CakeShape.SQUARE
+                id = 1,
+                sabor = CakeFlavor.CHOCOLATE,
+                glaseado = CakeFrosting.CHOCOLATE,
+                topping = CakeTopping.STRAWBERRIES,
+                relleno = CakeFilling.CHOCOLATE,
+                tamanio = CakeSize.MEDIUM,
+                forma = CakeShape.HEART
             ),
             Cake(
-                CakeFlavor.RED_VELVET,
-                CakeFrosting.STRAWBERRY,
-                CakeTopping.STRAWBERRIES,
-                CakeFilling.STRAWBERRY_JAM,
-                CakeSize.MEDIUM,
-                CakeShape.HEART
+                id = 2,
+                sabor = CakeFlavor.CARROT,
+                glaseado = CakeFrosting.VANILLA,
+                topping = CakeTopping.SPRINKLES,
+                relleno = CakeFilling.PASTRY_CREAM,
+                tamanio = CakeSize.SMALL,
+                forma = CakeShape.ROUND
+            ),
+            Cake(
+                id = 3,
+                sabor = CakeFlavor.VANILLA,
+                glaseado = CakeFrosting.STRAWBERRY,
+                topping = CakeTopping.STRAWBERRIES,
+                relleno = CakeFilling.STRAWBERRY_JAM,
+                tamanio = CakeSize.LARGE,
+                forma = CakeShape.HEART
+            ),
+            Cake(
+                id = 4,
+                sabor = CakeFlavor.RED_VELVET,
+                glaseado = CakeFrosting.CREAM,
+                topping = CakeTopping.SPRINKLES,
+                relleno = CakeFilling.PASTRY_CREAM,
+                tamanio = CakeSize.SMALL,
+                forma = CakeShape.SQUARE
+            ),
+            Cake(
+                id = 5,
+                sabor = CakeFlavor.VANILLA,
+                glaseado = CakeFrosting.STRAWBERRY,
+                topping = CakeTopping.COOKIES,
+                relleno = CakeFilling.STRAWBERRY_JAM,
+                tamanio = CakeSize.LARGE,
+                forma = CakeShape.HEART
             )
         )
     }

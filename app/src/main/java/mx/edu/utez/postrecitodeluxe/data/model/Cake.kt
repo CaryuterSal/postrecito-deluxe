@@ -1,6 +1,7 @@
 package mx.edu.utez.postrecitodeluxe.data.model
 
 data class Cake (
+    val id: Int,
     val sabor: CakeFlavor,
     val glaseado: CakeFrosting,
     val topping: CakeTopping,

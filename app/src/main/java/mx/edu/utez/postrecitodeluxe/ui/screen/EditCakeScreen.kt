@@ -78,6 +78,7 @@ fun EditCakeScreen(viewModel: CakeViewModel, navController: NavController){
 fun EditCakeScreenPreview(){
     val vm = viewModel<CakeViewModel>()
     vm.addCake(Cake(
+        1,
         CakeFlavor.CHOCOLATE,
         CakeFrosting.VANILLA,
         CakeTopping.SPRINKLES,
