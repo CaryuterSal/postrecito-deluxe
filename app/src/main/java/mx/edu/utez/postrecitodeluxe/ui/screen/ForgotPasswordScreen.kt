@@ -15,13 +15,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.testing.TestNavHostController
+import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField
+import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField2
 import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
 import mx.edu.utez.postrecitodeluxe.viewmodel.PasswordViewModel
 import mx.edu.utez.postrecitodeluxe.viewmodel.RegisterViewModel
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ForgotPasswordScreen(navController: NavController, viewModel: PasswordViewModel = viewModel()
 ) {
@@ -72,11 +72,8 @@ fun ForgotPasswordScreen(navController: NavController, viewModel: PasswordViewMo
                 )
 
 
-                OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    label = { Text("Correo Electrónico") },
-                    modifier = Modifier.fillMaxWidth()
+                UserInputField(
+                    ""
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
