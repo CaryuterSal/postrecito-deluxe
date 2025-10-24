@@ -33,13 +33,13 @@ import mx.edu.utez.postrecitodeluxe.data.model.CakeTopping
 import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
 
 @Composable
-fun CakeCard(cake: Cake, x: (Cake) -> Unit, modifier: Modifier = Modifier) {
+fun CakeCard(cake: Cake, onClick: (Cake) -> Unit, modifier: Modifier = Modifier) {
     val cakeBgColor = Color(0xFFF5F8F0)
 
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .clickable{x(cake)},
+            .clickable{onClick(cake)},
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
         colors = CardDefaults.cardColors(containerColor = cakeBgColor),
         shape = RoundedCornerShape(30.dp)
@@ -96,7 +96,7 @@ fun PreviewCakeCard(){
     )
     PostrecitoDeluxeTheme {
         CakeCard(c,
-            x = {}
+            onClick = {}
         )
     }
 }

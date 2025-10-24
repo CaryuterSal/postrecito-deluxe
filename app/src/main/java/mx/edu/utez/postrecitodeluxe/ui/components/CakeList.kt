@@ -15,20 +15,9 @@ import mx.edu.utez.postrecitodeluxe.data.model.CakeSize
 import mx.edu.utez.postrecitodeluxe.data.model.CakeTopping
 import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
 
-@Composable
-fun CakeList(lista: List<Cake>, x: (Cake) -> Unit) {
-    LazyColumn(
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        items(items = lista, key = {it.id} ) {cake ->
-            CakeCard(cake,x)
-        }
-    }
-}
-
 @Preview (showBackground = true)
 @Composable
-fun PreviewPassportList() {
+fun CakeListPreview() {
     val lista = listOf(
         Cake(
             id = 1,
@@ -80,4 +69,15 @@ fun PreviewPassportList() {
         CakeList(lista) { }
     }
 
+}
+
+@Composable
+fun CakeList(lista: List<Cake>, onClick: (Cake) -> Unit) {
+    LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        items(items = lista, key = {it.id} ) {cake ->
+            CakeCard(cake,onClick)
+        }
+    }
 }
