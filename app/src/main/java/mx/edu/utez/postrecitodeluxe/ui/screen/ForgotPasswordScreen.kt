@@ -1,37 +1,28 @@
+package mx.edu.utez.postrecitodeluxe.ui.screen
+
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField
-import mx.edu.utez.postrecitodeluxe.ui.components.inputs.UserInputField2
+import androidx.navigation.compose.rememberNavController
 import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
-import mx.edu.utez.postrecitodeluxe.viewmodel.PasswordViewModel
-import mx.edu.utez.postrecitodeluxe.viewmodel.RegisterViewModel
+import mx.edu.utez.postrecitodeluxe.viewmodel.CakeViewModel
 
 
 @Composable
-fun ForgotPasswordScreen(navController: NavController, viewModel: PasswordViewModel = viewModel()
+fun ForgotPasswordScreen(
+    navController: NavController, viewModel: CakeViewModel = viewModel()
 ) {
-    var email by remember { mutableStateOf("") }
 
-    val onResetClick: (email: String) -> Unit = { email ->
-
-        navController.popBackStack()
-
-    }
 
     val regresoLoginClick: () -> Unit = {
         navController.navigate("login")
@@ -44,7 +35,7 @@ fun ForgotPasswordScreen(navController: NavController, viewModel: PasswordViewMo
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column (
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp)
@@ -83,10 +74,10 @@ fun ForgotPasswordScreen(navController: NavController, viewModel: PasswordViewMo
 
 
                 Button(
-                    onClick = ,
+                    onClick = { navController.navigate("CodePassword") },
                     modifier = Modifier.fillMaxWidth(),
 
-                ) {
+                    ) {
                     Text("Restablecer Contraseña")
                 }
 
@@ -103,5 +94,13 @@ fun ForgotPasswordScreen(navController: NavController, viewModel: PasswordViewMo
             }
         }
     }
+}
 
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewForgotScrren(){
+    PostrecitoDeluxeTheme {
+        ForgotPasswordScreen(rememberNavController(), viewModel ())
+    }
 }

@@ -95,7 +95,7 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
         }
 
         Link("¿Olvidaste tu contraseña?") {
-            navController.navigate("forgot_passwordforgot_password")
+            navController.navigate("forgotPassword")
         }
     }
 }

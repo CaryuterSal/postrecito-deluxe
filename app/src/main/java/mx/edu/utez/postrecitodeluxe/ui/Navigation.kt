@@ -5,22 +5,23 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import mx.edu.utez.postrecitodeluxe.ui.screen.CodePasswordScreen
 import mx.edu.utez.postrecitodeluxe.ui.screen.CreateCakeScreen
 import mx.edu.utez.postrecitodeluxe.ui.screen.EditCakeScreen
-import mx.edu.utez.postrecitodeluxe.ui.screen.ForgotPasswordScreen
+
 import mx.edu.utez.postrecitodeluxe.ui.screen.HomeScreen
 import mx.edu.utez.postrecitodeluxe.ui.screen.LoginScreen
 import mx.edu.utez.postrecitodeluxe.ui.screen.RegisterScreen
 import mx.edu.utez.postrecitodeluxe.viewmodel.CakeViewModel
 import mx.edu.utez.postrecitodeluxe.viewmodel.LoginViewModel
-
+import mx.edu.utez.postrecitodeluxe.ui.screen.ForgotPasswordScreen
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     val cakeViewModel: CakeViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = "home") {
+    NavHost(navController = navController, startDestination = "login") {
         composable("login") {
             val viewModel: LoginViewModel = viewModel()
             LoginScreen(viewModel = viewModel, navController = navController)
@@ -37,9 +38,17 @@ fun Navigation() {
         composable("createCake"){
             CreateCakeScreen(viewModel = cakeViewModel, navController = navController)
         }
-        composable("forgot_password") {
-            ForgotPasswordScreen()
+
+        composable("forgotPassword"){
+            ForgotPasswordScreen(viewModel = cakeViewModel, navController = navController)
         }
+
+        composable("CodePassword"){
+            CodePasswordScreen(viewModel = cakeViewModel, navController = navController)
+        }
+
+
+
 
     }
 }
