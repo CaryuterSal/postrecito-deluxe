@@ -74,7 +74,7 @@ horizontalAlignment = Alignment.CenterHorizontally
 
 
             Button(
-                onClick = { navController.navigate("register") } ,
+                onClick = { navController.navigate("NewPassword") } ,
                 modifier = Modifier.fillMaxWidth(),
 
                 ) {

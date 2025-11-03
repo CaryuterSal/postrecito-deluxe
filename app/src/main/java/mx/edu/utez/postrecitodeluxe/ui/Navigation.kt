@@ -15,6 +15,7 @@ import mx.edu.utez.postrecitodeluxe.ui.screen.RegisterScreen
 import mx.edu.utez.postrecitodeluxe.viewmodel.CakeViewModel
 import mx.edu.utez.postrecitodeluxe.viewmodel.LoginViewModel
 import mx.edu.utez.postrecitodeluxe.ui.screen.ForgotPasswordScreen
+import mx.edu.utez.postrecitodeluxe.ui.screen.NewPassword
 
 @Composable
 fun Navigation() {
@@ -45,6 +46,10 @@ fun Navigation() {
 
         composable("CodePassword"){
             CodePasswordScreen(viewModel = cakeViewModel, navController = navController)
+        }
+
+        composable("NewPassword"){
+            NewPassword(viewModel = cakeViewModel, navController = navController)
         }
 
 
