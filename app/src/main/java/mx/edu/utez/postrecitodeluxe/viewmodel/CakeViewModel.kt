@@ -1,10 +1,17 @@
 package mx.edu.utez.postrecitodeluxe.viewmodel
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import mx.edu.utez.postrecitodeluxe.data.CakeRepository
 import mx.edu.utez.postrecitodeluxe.data.model.Cake
 import mx.edu.utez.postrecitodeluxe.data.model.CakeFilling
 import mx.edu.utez.postrecitodeluxe.data.model.CakeFlavor
@@ -12,88 +19,63 @@ import mx.edu.utez.postrecitodeluxe.data.model.CakeFrosting
 import mx.edu.utez.postrecitodeluxe.data.model.CakeShape
 import mx.edu.utez.postrecitodeluxe.data.model.CakeSize
 import mx.edu.utez.postrecitodeluxe.data.model.CakeTopping
+import mx.edu.utez.postrecitodeluxe.persistence.AppDatabase
 
-class CakeViewModel: ViewModel() {
-    private val _cakeList = MutableStateFlow<List<Cake>>(emptyList())
-    val cakeList = _cakeList.asStateFlow()
+
+class CakeViewModel(application: Application): AndroidViewModel(application) {
+
+    private val repo: CakeRepository
+
+    val cakeList: StateFlow<List<Cake>>
 
     private val _selectedCake = MutableStateFlow<Int?>(null)
     val selectedCake = _selectedCake.asStateFlow()
 
     init {
-        _cakeList.value = listOf(
-            Cake(
-                id = 1,
-                sabor = CakeFlavor.CHOCOLATE,
-                glaseado = CakeFrosting.CHOCOLATE,
-                topping = CakeTopping.STRAWBERRIES,
-                relleno = CakeFilling.CHOCOLATE,
-                tamanio = CakeSize.MEDIUM,
-                forma = CakeShape.HEART
-            ),
-            Cake(
-                id = 2,
-                sabor = CakeFlavor.CARROT,
-                glaseado = CakeFrosting.VANILLA,
-                topping = CakeTopping.SPRINKLES,
-                relleno = CakeFilling.PASTRY_CREAM,
-                tamanio = CakeSize.SMALL,
-                forma = CakeShape.ROUND
-            ),
-            Cake(
-                id = 3,
-                sabor = CakeFlavor.VANILLA,
-                glaseado = CakeFrosting.STRAWBERRY,
-                topping = CakeTopping.STRAWBERRIES,
-                relleno = CakeFilling.STRAWBERRY_JAM,
-                tamanio = CakeSize.LARGE,
-                forma = CakeShape.HEART
-            ),
-            Cake(
-                id = 4,
-                sabor = CakeFlavor.RED_VELVET,
-                glaseado = CakeFrosting.CREAM,
-                topping = CakeTopping.SPRINKLES,
-                relleno = CakeFilling.PASTRY_CREAM,
-                tamanio = CakeSize.SMALL,
-                forma = CakeShape.SQUARE
-            ),
-            Cake(
-                id = 5,
-                sabor = CakeFlavor.VANILLA,
-                glaseado = CakeFrosting.STRAWBERRY,
-                topping = CakeTopping.COOKIES,
-                relleno = CakeFilling.STRAWBERRY_JAM,
-                tamanio = CakeSize.LARGE,
-                forma = CakeShape.HEART
-            )
+        val db = AppDatabase.getInstance(application)
+        repo = CakeRepository(db.cakeDao())
+
+        // Room Flow → StateFlow para Compose
+        cakeList = repo.cakes.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5000),
+            emptyList()
         )
     }
 
-
     fun selectCake(index: Int){
-        _selectedCake.update { index }
+        _selectedCake.value = index
     }
 
-    fun updateCake(newCake: Cake){
-        _cakeList.update {
-            it.mapIndexed { i, current ->
-                if (_selectedCake.value != null && _selectedCake.value == i) newCake else current
-            }
+    fun addCake(newCake: Cake) {
+        viewModelScope.launch {
+            repo.addCake(newCake)
         }
     }
 
-    fun addCake(newCake: Cake){
-        _cakeList.update { it + newCake }
-    }
+    fun updateCake(newCake: Cake) {
+        val selected = _selectedCake.value ?: return
+        val cake = cakeList.value.getOrNull(selected) ?: return
 
-    fun deleteCake(){
-        _cakeList.update {
-            it.filterIndexed { i, current ->
-                _selectedCake.value == null || _selectedCake.value != i
-            }
+        viewModelScope.launch {
+            repo.updateCake(cake.copy(
+                topping = newCake.topping,
+                glaseado = newCake.glaseado,
+                sabor = newCake.sabor,
+                relleno = newCake.relleno,
+                tamanio = newCake.tamanio,
+                forma = newCake.forma
+            ))
         }
-        _selectedCake.update { null }
     }
 
+    fun deleteCake() {
+        val selected = _selectedCake.value ?: return
+        val cake = cakeList.value.getOrNull(selected) ?: return
+
+        viewModelScope.launch {
+            repo.deleteCake(cake)
+            _selectedCake.value = null
+        }
+    }
 }

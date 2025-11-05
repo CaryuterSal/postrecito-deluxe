@@ -23,13 +23,12 @@ import mx.edu.utez.postrecitodeluxe.viewmodel.CakeViewModel
 fun CreateCakeScreen(viewModel: CakeViewModel, navController: NavController){
 
     var cake by remember { mutableStateOf(Cake(
-        1,
-        CakeFlavor.CHOCOLATE,
-        CakeFrosting.VANILLA,
-        CakeTopping.SPRINKLES,
-        CakeFilling.CHOCOLATE,
-        CakeSize.LARGE,
-        CakeShape.SQUARE
+        sabor = CakeFlavor.CHOCOLATE,
+        glaseado = CakeFrosting.VANILLA,
+        topping = CakeTopping.SPRINKLES,
+        relleno = CakeFilling.CHOCOLATE,
+        tamanio = CakeSize.LARGE,
+        forma = CakeShape.SQUARE
     )) }
     CakePickerScreen(
         cake = cake,
