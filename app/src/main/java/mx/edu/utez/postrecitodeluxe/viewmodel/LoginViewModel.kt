@@ -11,7 +11,7 @@ class LoginViewModel: ViewModel() {
     var loginError = mutableStateOf("")
 
     fun login(onSuccess: () -> Unit) {
-        if (username.value == "admin" && password.value == "123") {
+        if (email.value == "admin" && password.value == "123") {
             loginError.value = ""
             onSuccess()
         } else {

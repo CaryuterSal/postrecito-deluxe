@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -22,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+
 import mx.edu.utez.postrecitodeluxe.ui.theme.PostrecitoDeluxeTheme
 import mx.edu.utez.postrecitodeluxe.R
 import mx.edu.utez.postrecitodeluxe.ui.components.buttons.PrimaryButton
@@ -89,9 +91,9 @@ fun LoginScreen(viewModel: LoginViewModel, navController: NavController) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Icon(painterResource(R.drawable.logotipos), contentDescription = "Twitter")
-            Icon(painterResource(R.drawable.letra_g), contentDescription = "Google")
-            Icon(painterResource(R.drawable.facebook), contentDescription = "Facebook")
+            Icon(painterResource(R.drawable.logotipos), contentDescription = "Twitter", modifier = Modifier.size(30.dp))
+            Icon(painterResource(R.drawable.letra_g), contentDescription = "Google", modifier = Modifier.size(30.dp))
+            Icon(painterResource(R.drawable.facebook), contentDescription = "Facebook", modifier = Modifier.size(30.dp))
         }
 
         Link("¿Olvidaste tu contraseña?") {
