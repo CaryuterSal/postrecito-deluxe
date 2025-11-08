@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import mx.edu.utez.postrecitodeluxe.R
 import mx.edu.utez.postrecitodeluxe.ui.components.buttons.PrimaryButton
 import mx.edu.utez.postrecitodeluxe.ui.components.text.Link
@@ -27,7 +28,10 @@ import mx.edu.utez.postrecitodeluxe.viewmodel.RegisterViewModel
 
 
 @Composable
-fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel = RegisterViewModel()) {
+fun RegisterScreen(
+    viewModel: RegisterViewModel = viewModel(),
+    navController: NavController
+){
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,13 +53,13 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel = 
         )
         PasswordField(
             value = viewModel.password.value,
-            onValueChange = {viewModel.password.value = (it)},
+            onValueChange = { viewModel.password.value = it },
             label = "Contraseña"
         )
 
         PasswordField(
-            value = viewModel.password.value,
-            onValueChange = {viewModel.password.value = (it)},
+            value = viewModel.confirmPassword.value,
+            onValueChange = { viewModel.confirmPassword.value = it },
             label = "Confirmar contraseña"
         )
 
@@ -63,7 +67,7 @@ fun RegisterScreen(navController: NavController, viewModel: RegisterViewModel = 
 
         PrimaryButton(text = "Registrarse") {
             viewModel.register {
-                navController.navigate("homeScreen") {
+                navController.navigate("login") {
                     popUpTo("register") { inclusive = true }
                 }
             }

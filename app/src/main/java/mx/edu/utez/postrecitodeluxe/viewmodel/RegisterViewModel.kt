@@ -3,7 +3,7 @@ package mx.edu.utez.postrecitodeluxe.viewmodel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
-class RegisterViewModel {
+class RegisterViewModel : ViewModel() {
     val username = mutableStateOf("")
     val email = mutableStateOf("")
     val password = mutableStateOf("")
@@ -13,6 +13,7 @@ class RegisterViewModel {
         if (password.value == confirmPassword.value && password.value.isNotEmpty()) {
             onSuccess()
         } else {
+
         }
     }
 }

@@ -31,7 +31,9 @@ fun Navigation() {
             val viewModel: LoginViewModel = viewModel()
             LoginScreen(viewModel = viewModel, navController = navController)
         }
-        composable("register") { RegisterScreen(navController) }
+        composable("register") {
+            RegisterScreen(navController = navController)
+        }
         composable("home") {
             HomeScreen(viewModel = cakeViewModel, navController = navController)
         }
@@ -55,8 +57,6 @@ fun Navigation() {
         composable("NewPassword"){
             NewPassword(viewModel = cakeViewModel, navController = navController)
         }
-
-
 
 
     }
