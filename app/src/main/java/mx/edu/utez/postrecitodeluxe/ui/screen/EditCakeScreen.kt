@@ -8,6 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,6 +46,8 @@ fun EditCakeScreen(viewModel: CakeViewModel, navController: NavController){
     val selectedIndex by viewModel.selectedCake.collectAsState()
 
     var cake by remember { mutableStateOf(cakes[selectedIndex!!].copy()) }
+
+    var showDeleteDialog by remember { mutableStateOf(false) }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -65,8 +71,28 @@ fun EditCakeScreen(viewModel: CakeViewModel, navController: NavController){
                 .align(Alignment.TopEnd)
                 .size(90.dp)
         ) {
-            viewModel.deleteCake()
-            navController.navigate("home")
+            showDeleteDialog = true
+        }
+        if (showDeleteDialog) {
+            AlertDialog(
+                onDismissRequest = { showDeleteDialog = false },
+                title = { Text("Confirmar eliminación") },
+                text = { Text("¿Seguro que deseas eliminar este pastel?.") },
+                confirmButton = {
+                    TextButton(onClick = {
+                        viewModel.deleteCake()
+                        showDeleteDialog = false
+                        navController.navigate("home")
+                    }) {
+                        Text("Eliminar", color = MaterialTheme.colorScheme.error)
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = { showDeleteDialog = false }) {
+                        Text("Cancelar")
+                    }
+                }
+            )
         }
     }
 
