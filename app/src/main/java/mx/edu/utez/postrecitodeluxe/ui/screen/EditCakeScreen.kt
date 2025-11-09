@@ -77,7 +77,7 @@ fun EditCakeScreen(viewModel: CakeViewModel, navController: NavController){
             AlertDialog(
                 onDismissRequest = { showDeleteDialog = false },
                 title = { Text("Confirmar eliminación") },
-                text = { Text("¿Seguro que deseas eliminar este pastel?.") },
+                text = { Text("¿Seguro que deseas eliminar este pastel?") },
                 confirmButton = {
                     TextButton(onClick = {
                         viewModel.deleteCake()
