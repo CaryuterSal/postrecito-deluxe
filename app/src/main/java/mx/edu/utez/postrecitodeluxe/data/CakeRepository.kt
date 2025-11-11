@@ -1,29 +1,39 @@
 package mx.edu.utez.postrecitodeluxe.data
 
-import kotlinx.coroutines.flow.Flow
 import mx.edu.utez.postrecitodeluxe.data.model.Cake
+import mx.edu.utez.postrecitodeluxe.network.RetrofitClient
+import retrofit2.Response
 
-class CakeRepository(
-    private val dao: CakeDao
-) {
+class CakeRepository {
 
-    val cakes = dao.getAll()
+    private val api = RetrofitClient.instance
 
-    suspend fun addCake(cake: Cake) {
-        dao.insert(cake)
+    // Obtener todos los pasteles
+    suspend fun getAllCakes(): Response<List<Cake>> {
+        return api.getCakes()
     }
 
-    suspend fun updateCake(cake: Cake) {
-        dao.update(cake)
-    }
-    suspend fun deleteCake(cake: Cake) {
-        dao.delete(cake)
-    }
-    fun getCakeById(id: Int): Flow<Cake> {
-        return dao.getById(id)
-    }
-    fun getAllCakes(): Flow<List<Cake>> {
-        return dao.getAll()
+    // Crear un pastel
+    suspend fun addCake(cake: Cake): Response<Cake> {
+        return api.createCake(cake)
     }
 
+    // Actualizar un pastel
+    suspend fun updateCake(cake: Cake): Response<Cake> {
+        return api.updateCake(cake.id, cake)
+    }
+
+    // Eliminar un pastel
+    suspend fun deleteCake(id: Int): Response<Map<String, Any>> {
+        return api.deleteCake(id)
+    }
+
+    // Buscar un pastel por ID (localmente del GET completo)
+    suspend fun getCakeById(id: Int): Cake? {
+        val response = api.getCakes()
+        return if (response.isSuccessful) {
+            response.body()?.firstOrNull { it.id == id }
+        } else null
+    }
 }
+

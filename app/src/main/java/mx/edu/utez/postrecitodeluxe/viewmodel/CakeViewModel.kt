@@ -24,23 +24,27 @@ import mx.edu.utez.postrecitodeluxe.persistence.AppDatabase
 
 class CakeViewModel(application: Application): AndroidViewModel(application) {
 
-    private val repo: CakeRepository
+    private val repo: CakeRepository = CakeRepository() // sin DAO, repo usa Retrofit
 
-    val cakeList: StateFlow<List<Cake>>
+    private val _cakeList = MutableStateFlow<List<Cake>>(emptyList())
+    val cakeList: StateFlow<List<Cake>> = _cakeList
 
     private val _selectedCake = MutableStateFlow<Int?>(null)
     val selectedCake = _selectedCake.asStateFlow()
 
     init {
-        val db = AppDatabase.getInstance(application)
-        repo = CakeRepository(db.cakeDao())
+        fetchCakes()
+    }
 
-        // Room Flow → StateFlow para Compose
-        cakeList = repo.cakes.stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            emptyList()
-        )
+    private fun fetchCakes() {
+        viewModelScope.launch {
+            val response = repo.getAllCakes()
+            if (response.isSuccessful) {
+                _cakeList.value = response.body() ?: emptyList()
+            } else {
+                // aquí puedes manejar errores
+            }
+        }
     }
 
     fun selectCake(index: Int){
@@ -49,16 +53,19 @@ class CakeViewModel(application: Application): AndroidViewModel(application) {
 
     fun addCake(newCake: Cake) {
         viewModelScope.launch {
-            repo.addCake(newCake)
+            val response = repo.addCake(newCake)
+            if (response.isSuccessful) {
+                fetchCakes() // refresca la lista
+            }
         }
     }
 
     fun updateCake(newCake: Cake) {
         val selected = _selectedCake.value ?: return
-        val cake = cakeList.value.getOrNull(selected) ?: return
+        val cake = _cakeList.value.getOrNull(selected) ?: return
 
         viewModelScope.launch {
-            repo.updateCake(cake.copy(
+            val response = repo.updateCake(cake.copy(
                 topping = newCake.topping,
                 glaseado = newCake.glaseado,
                 sabor = newCake.sabor,
@@ -66,16 +73,22 @@ class CakeViewModel(application: Application): AndroidViewModel(application) {
                 tamanio = newCake.tamanio,
                 forma = newCake.forma
             ))
+            if (response.isSuccessful) {
+                fetchCakes()
+            }
         }
     }
 
     fun deleteCake() {
         val selected = _selectedCake.value ?: return
-        val cake = cakeList.value.getOrNull(selected) ?: return
+        val cake = _cakeList.value.getOrNull(selected) ?: return
 
         viewModelScope.launch {
-            repo.deleteCake(cake)
-            _selectedCake.value = null
+            val response = repo.deleteCake(cake.id)
+            if (response.isSuccessful) {
+                _selectedCake.value = null
+                fetchCakes()
+            }
         }
     }
 }
